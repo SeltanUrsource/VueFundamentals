@@ -4,7 +4,7 @@
           <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
       </div>
     <div class="top-row">
-      <div class="top part">
+      <div :class="[saleBorderClass, 'top', 'part']">
           <div class="robot-name">
               {{selectedRobot.head.title}}
               <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
@@ -15,24 +15,24 @@
       </div>
     </div>
     <div class="middle-row">
-      <div class="left part">
+      <div :class="['left', 'part']">
         <img :src="selectedRobot.leftArm.src" title="left arm"/>
         <button @click="selectPreviousLeftArm()" class="prev-selector">&#9650;</button>
         <button @click="selectNextLeftArm()" class="next-selector">&#9660;</button>
       </div>
-      <div class="center part">
+      <div :class="['center', 'part']">
         <img :src="selectedRobot.torsos.src" title="left arm"/>
         <button @click="selectPreviousTorsos()" class="prev-selector">&#9668;</button>
         <button @click="selectNextTorsos()" class="next-selector">&#9658;</button>
       </div>
-      <div class="right part">
+      <div :class="['right', 'part']">
         <img :src="selectedRobot.rightArm.src" title="left arm"/>
         <button @click="selectPreviousRightArm()" class="prev-selector">&#9650;</button>
         <button @click="selectNextRightArm()" class="next-selector">&#9660;</button>
       </div>
     </div>
     <div class="bottom-row">
-      <div class="bottom part">
+      <div :class="['bottom', 'part']">
         <img :src="selectedRobot.base.src" title="left arm"/>
         <button @click="selectPreviousBases()" class="prev-selector">&#9668;</button>
         <button @click="selectNextBases()" class="next-selector">&#9658;</button>
@@ -85,6 +85,14 @@ function getNextValidIndex(index, length){
             };
         },
         computed:{
+          saleBorderClass(){
+            return this.selectedRobot.head.onSale ? 'saleBorder' : '';
+          },
+          headBorderStyle(){
+            return{
+              border: this.selectedRobot.head.onSale ? '3px solid red' : '3px solid #aaa',
+            }
+          },
             selectedRobot(){
                 return{ 
                     head: AvailableParts.heads[this.selectedHeadIndex],
@@ -135,7 +143,7 @@ function getNextValidIndex(index, length){
     }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .part {
   position: relative;
   width:165px;
@@ -248,8 +256,10 @@ td, th{
     padding: 5px;
     padding-right: 20px;
 }
-
 .cost{
     text-align: right;
+}
+.sale-border{
+  border: 3px solid red;
 }
 </style>
