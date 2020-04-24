@@ -99,7 +99,7 @@ function getNextValidIndex(index, length){
             addToCart(){
                 const robot = this.selectedRobot;
                 const cost = robot.head.cost + robot.leftArm.cost + robot.rightArm.cost + robot.torsos.cost + robot.base.cost;
-                this.cost.push(Object.assign({}, robot, {cost}));
+                this.cart.push(Object.assign({}, robot, {cost}));
             },
             selectNextHead(){
                 this.selectedHeadIndex = getNextValidIndex(this.selectedHeadIndex, AvailableParts.heads.length);
