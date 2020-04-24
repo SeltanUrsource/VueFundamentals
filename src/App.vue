@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue'
+import HomePage from './build/RobotBuilder.vue'
 
 export default {
   name: 'App',
