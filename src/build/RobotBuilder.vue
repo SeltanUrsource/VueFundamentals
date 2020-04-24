@@ -2,17 +2,19 @@
   <div>
     <div class="preview">
       <div class="preview-content">
-        <div class="top-row">
-          <img :src="selectedRobot.head.src" />
-        </div>
-        <div class="middle-row">
-          <img :src="selectedRobot.leftArm.src" class="rotate-left" />
-          <img :src="selectedRobot.torsos.src" />
-          <img :src="selectedRobot.rightArm.src" class="rotate-right" />
-        </div>
-        <div class="bottom-row">
-          <img :src="selectedRobot.base.src" />
-        </div>
+        <CollapsableSection>
+          <div class="top-row">
+            <img :src="selectedRobot.head.src" />
+          </div>
+          <div class="middle-row">
+            <img :src="selectedRobot.leftArm.src" class="rotate-left" />
+            <img :src="selectedRobot.torsos.src" />
+            <img :src="selectedRobot.rightArm.src" class="rotate-right" />
+          </div>
+          <div class="bottom-row">
+            <img :src="selectedRobot.base.src" />
+          </div>
+        </CollapsableSection>
       </div>
       <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
     </div>
@@ -78,10 +80,11 @@
 import availableParts from "../data/parts";
 import CreatedHookMixin from "./created-hook-mixin";
 import PartSelector from "./PartSelector.vue";
+import CollapsableSection from'../shared/CollapsableSection.vue';
 
 export default {
   name: "RobotBuilder",
-  components: { PartSelector },
+  components: { PartSelector, CollapsableSection },
   data() {
     return {
       availableParts,
@@ -245,8 +248,8 @@ th {
 }
 .preview {
   position: absolute;
-  top: -20px;
-  right: 0;
+  top: 70px;
+  right: 10px;
   width: 210px;
   height: 210px;
   padding: 5px;
@@ -264,5 +267,4 @@ th {
 .rotate-left {
   transform: rotate(-90deg);
 }
-
 </style>
