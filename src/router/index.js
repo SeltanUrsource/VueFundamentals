@@ -8,19 +8,28 @@ import RobotHeads from "../parts/RobotHeads.vue";
 import RobotArms from "../parts/RobotArms.vue";
 import RobotTorsos from "../parts/RobotTorsos.vue";
 import RobotBases from "../parts/RobotBases.vue";
+import SidebarStandard from "../sidebar/SidebarStandard";
+import SidebarBuild from "../sidebar/SidebarBuild";
 
 Vue.use(VueRouter);
 
 export default new VueRouter({
+  mode: 'history',
   routes: [{
     path: '/',
     name: 'Home',
-    component: HomePage
+    components: {
+      default: HomePage,
+      sidebar: SidebarStandard
+    }
   },
   {
     path: '/build',
     name: 'Build',
-    component: RobotBuilder,
+    components: {
+      default: RobotBuilder,
+      sidebar: SidebarBuild
+    }
   },
   {
     path: '/parts/browse',
@@ -53,6 +62,10 @@ export default new VueRouter({
     path: '/parts/:partType/:id',
     name: 'Parts',
     component: PartInfo,
-    props: true
+    props: true,
+    beforeEnter(to, from, next){
+      const isValidId = Number.isInteger(Number(to.params.id));
+      next(isValidId);
+    }
   }]
 });
